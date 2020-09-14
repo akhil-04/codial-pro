@@ -4,10 +4,13 @@ const express = require('express');
 const router = express.Router();
 //requiring the controller here
 const homeController = require('../controllers/home_controller');
-//execesssing the controller
+//execesssing the controller this handles home request
 router.get('/', homeController.home);
-// console.log('router exports ');
+// this handles the /users request
+router.use('/users', require('./users'));
 
+//for any further routes, acces from here 
+//router.use('/routerNmae', require('./routerFile'));
 
 
 
