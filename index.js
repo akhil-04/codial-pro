@@ -11,6 +11,10 @@ const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 app.use(expressLayouts);
 
+
+//requiring mongoose here
+const db = require('./config/mongoose');
+
 //extarct style and script from sub pages to layout
 app.set('layout extractStyles' ,true);
 app.set('layout extractScripts' ,true);
@@ -33,3 +37,5 @@ app.listen(port, function(err){
     }
     console.log(`Server is running on port: ${port}`);
 });
+
+//wait
