@@ -7,6 +7,11 @@ const app = express();
 //port on which we run our server
 const port = 8000;
 
+//requring the cookies
+const cookieParser = require('cookie-parser');
+//need to tell app to use this
+app.use(express.urlencoded());
+app.use(cookieParser());
 //requring the ejs-layouts
 const expressLayouts = require('express-ejs-layouts');
 app.use(expressLayouts);
