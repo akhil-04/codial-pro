@@ -20,6 +20,11 @@ app.use(expressLayouts);
 //requiring mongoose here
 const db = require('./config/mongoose');
 
+//used for session cookie
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+
 //extarct style and script from sub pages to layout
 app.set('layout extractStyles' ,true);
 app.set('layout extractScripts' ,true);
@@ -30,6 +35,20 @@ app.use(express.static('./assets'));
 //ejs requiring and giving path of folder
 app.set('view engine', 'ejs');
 app.set('views', './views');
+
+//middleware for passport js
+app.use(session({
+    name: 'codeail',
+    secret: 'blahsomething',
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        maxAge: (1000* 60 * 100)
+    }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 //create middleware for routes
 app.use('/', require('./routes'));
