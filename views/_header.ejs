@@ -1,3 +1,43 @@
 <header>
-    page header
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/header.css">
+    
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand">Codeial</a>
+        <!-- <form class="form-inline"> -->
+            <div>
+         <% if (locals.user){ %>
+            <a href="/users/profile">
+                <button class="btn btn-primary" type="button"><%= user.name %></button>
+            </a>
+            <a href="/users/sign-out"><button class="btn btn-primary" type="submit"> Sign Out </button> </a>
+            <%}else{%>
+                <a href="/users/sign-in">  <button class="btn btn-primary" type="submit">Sign In</button></a>
+                <a href="/users/sign-up"><button class="btn btn-primary" type="submit">Sign Up</button></a>
+            <% } %>
+        <!-- </form> -->
+    </div>
+      </nav>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </header>
+
+<!-- <ul>
+    <% if (locals.user){ %>
+        <li>
+        </li>
+        <li>
+            <!-- <a href="/users/sign-out"> Sign Out</a> -->
+        <!-- </li>
+        <%}else{%>
+            <li>
+                <a href="/users/sign-in"> Sign In</a>
+            </li>
+
+            <li>
+                <a href="/users/sign-up"> Sign Up</a>
+            </li>
+            <% } %>
+</ul> -->

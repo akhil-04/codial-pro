@@ -2,41 +2,61 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/users');
 
-//authentication
 passport.use(new LocalStrategy({
-    usernameField: 'email'
+    usernameField:'email'
 },
-function(email, passport, done){
-    //find a user and establish the identity
-    User.findOne({email: email}, function(err, user){
-        if(err){
-            console.log('error in finding the user --> passport');
-            return done(err);
-        }
-
-        if(!user || user.password != password){
-            console.log('Invalid username /password');
-            return done(null, false);
-        }
-        return done(null, user);
-    });
+    (email,password,done)=>{
+        //finding user if present in db,comparing with email
+        User.findOne({email:email},(err,user)=>{
+            if(err){console.log(`error in finding user`); return done(null);}
+            // user not found or password incorrect
+            if(!user || user.password != password){
+                console.log(`passowrd missmatch or invalid user`)
+                return done(null,false);
+            }
+            //user matched
+            return done(null,user);
+        })
     }
+
 ));
 
-//serializing the user to decide which key is to be kept in cookies
-passport.serializeUser(function(user, done){
-    done(null, user.id);
+// serializing user
 
+passport.serializeUser((user,done)=>{
+    return done(null,user.id);
+})
 
-//deserialize tthe user from the key in cookies
-passport.deserializeUser(function(id, done){
-    if(err){
-        console.log('error in finding the user');
-        return done(err);
-    }
-    return done(null ,user);
-    });
+//deserializing user
+
+passport.deserializeUser((id,done)=>{
+    User.findById(id,(err,user)=>{
+        if(err){console.log(`user is not found`); return done(err);}
+
+        return done(null,user);
+    })
 });
+
+// check if the user is authenticated
+
+passport.checkAuthentication = (req,res,next)=>{
+    //if the user is signed in then let him view the ejs 
+    if (req.isAuthenticated()){
+        return next();
+    }
+    //if the user is not signed in
+    return res.redirect('/users/sign-in');
+}
+
+//setting user 
+passport.setAuthenticatedUser = (req,res,next)=>{
+    if (req.isAuthenticated()){
+        res.locals.user = req.user
+    }
+    next();
+}
+
+
 
 
 module.exports = passport;

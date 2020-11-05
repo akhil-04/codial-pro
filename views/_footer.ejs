@@ -1,3 +1,30 @@
-<footer>
+<!-- <footer>
     page footer
+</footer> -->
+
+<footer id="layout-footer">
+    <div>
+        <p>
+            &copy; Akhil Sharma. All Rights Reserved
+        </p>
+    </div>
+
+    <div>
+        <nav class="footer-nav">
+            <ul>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                
+                <% if (locals.user) { %>
+                    
+                    <li>
+                        <a href="/users/profile/<%= user.id %>">Profile</a>
+                    </li>
+                <% } %>
+
+                
+            </ul>
+        </nav>
+    </div>
 </footer>

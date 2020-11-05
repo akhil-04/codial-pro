@@ -2,23 +2,9 @@
 const User = require('../models/users');
 
 module.exports.profile = function(req, res){
-   if(req.cookies.user_id){
-      User.findById(req.cookies.user_id, function(err, user){
-         if(user){
-            return res.render('profile',{
-               title: "User Profile",
-               user: user
-            })
-         }
-         return res.redirect('/users/sign-in');
-      });
-   }
-   else{
-      return res.redirect('/users/sign-in')
-   }
-   // return res.render('profile',{
-   //    title: "profile"
-   // });
+   return res.render('profile',{
+      title: "profile"
+   });
 }
 
 module.exports.post = function(req, res){
@@ -26,12 +12,18 @@ module.exports.post = function(req, res){
 };
 //render the sign up page
 module.exports.signUp = function(req, res){
+   if(req.isAuthenticated()){
+      return res.redirect('profile');
+   }
    return res.render('user_sign_up',{
       title: "Codeial | sign Up"
    });
 }
 //render the sign in page
 module.exports.signIn = function(req, res){
+   if(req.isAuthenticated()){
+      return res.redirect('profile');
+   }
    return res.render('user_sign_in',{
       title: "Codeial | sign In"
    });
@@ -49,7 +41,7 @@ module.exports.create = function(req,res){
          User.create(req.body, function(err, user){
             if(err){console.log('error in creating user while sign up'); return }
 
-            return res.redirect('/users/sign-in');
+            return res.redirect('sign-in');
          })
       }else{
          return res.redirect('back');
@@ -59,5 +51,11 @@ module.exports.create = function(req,res){
 
 //sign in and create a session for user
 module.exports.createSession = function(req, res){
+  return res.redirect('/users/profile');
+}
+
+
+module.exports.destroySession =(req,res)=>{
+   req.logout();
   return res.redirect('/');
 }
