@@ -8,6 +8,8 @@ const homeController = require('../controllers/home_controller');
 router.get('/', homeController.home);
 // this handles the /users request
 router.use('/users', require('./users'));
+//this handles the posts
+router.use('/posts', require('./posts'));
 
 //for any further routes, acces from here 
 //router.use('/routerNmae', require('./routerFile'));
