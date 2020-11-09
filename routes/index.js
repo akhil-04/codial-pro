@@ -14,7 +14,8 @@ router.use('/posts', require('./posts'));
 //for any further routes, acces from here 
 //router.use('/routerNmae', require('./routerFile'));
 
-
+//handles the comments 
+router.use('/comments', require('./comments'));
 
 
 // for exports this route to controller

@@ -1,6 +1,7 @@
 //create a action 
 //to create action just do 
 
+const { populate } = require('../models/post');
 const Post = require('../models/post');
 
 //module.exports.actionName = function(req, res){ //write the function }
@@ -17,7 +18,15 @@ module.exports.home = function(req, res){
 
 
     //populate the whole user object from each post
-    Post.find({}).populate('user').exec(function(err, posts){
+    Post.find({})
+    .populate('user')
+    .populate({
+        path: 'comments',
+        populate: {
+            path:'user'
+        }
+    })
+    .exec(function(err, posts){
         return res.render('home',{
             title: "Codeial | home",
             posts: posts
