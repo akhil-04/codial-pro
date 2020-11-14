@@ -9,7 +9,10 @@ module.exports.create = function(req, res){
                 post: req.body.post,
                 user: req.user._id
             }, function(err, comment){
-                console.log('error in creating comments');
+                if(err){
+                    console.log('error in creating comments');
+                }
+                
 
                 //comments is pushed to the post 
                 post.comments.push(comment);
