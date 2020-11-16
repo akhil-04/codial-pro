@@ -2,9 +2,12 @@
 const User = require('../models/users');
 
 module.exports.profile = function(req, res){
+   User.findById(req.params.id, function(err, user){
    return res.render('profile',{
-      title: "profile"
+      title: "profile",
+      profile_user:user
    });
+})
 }
 
 module.exports.post = function(req, res){

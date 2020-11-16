@@ -3,6 +3,7 @@
 
 const { populate } = require('../models/post');
 const Post = require('../models/post');
+const User = require('../models/users');
 
 //module.exports.actionName = function(req, res){ //write the function }
 module.exports.home = function(req, res){
@@ -27,13 +28,16 @@ module.exports.home = function(req, res){
         }
     })
     .exec(function(err, posts){
-        return res.render('home',{
-            title: "Codeial | home",
-            posts: posts
-        }); 
-    });
+        User.find({}, function(err, users){
+            return res.render('home',{
+                title: "Codeial | home",
+                posts: posts,
+                all_users: users
+            });
+        });
+    })
+
     
     // return res.end('<h1> Express is up for Codeial! </h1>');
-}
 
-//code toh sahi hain
+}
