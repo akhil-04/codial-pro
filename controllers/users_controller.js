@@ -1,4 +1,5 @@
 //to use the models here
+//lets keep it simple not in async await
 const User = require('../models/users');
 
 module.exports.profile = function(req, res){
@@ -20,10 +21,13 @@ module.exports.update = function(req, res){
       User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
          //req.body or we can we write
          //{name:req.body,name, email: req.body.email}
+         req.flash('success', 'Profile Updated');
          return res.redirect('back');
       });
    }else{
-      return res.status(401).send('Unauthorized');
+      req.flash('error', err);
+            return res.redirect('back');
+      // return res.status(401).send('Unauthorized');
    }
 }
 
@@ -40,7 +44,7 @@ module.exports.signUp = function(req, res){
 //render the sign in page
 module.exports.signIn = function(req, res){
    if(req.isAuthenticated()){
-      return res.redirect('profile');
+      return res.redirect('/users/profile');
    }
    return res.render('user_sign_in',{
       title: "Codeial | sign In"
@@ -69,11 +73,15 @@ module.exports.create = function(req,res){
 
 //sign in and create a session for user
 module.exports.createSession = function(req, res){
-  return res.redirect('/users/profile');
+   req.flash('success', 'Logged In successfully');
+   console.log(req.body)
+   console.log(res.body)
+  return res.redirect('/');
 }
 
 
 module.exports.destroySession =(req,res)=>{
    req.logout();
+   req.flash('success', 'Logged Out successfully');
   return res.redirect('/');
 }
