@@ -46,6 +46,8 @@ module.exports.destroy = async function(req, res){
                    messgae:'Post Deleted'
                });
            }
+
+           
            req.flash('success', 'Post and Associated comments Deleted!');
                 return res.redirect('back');
             }else{

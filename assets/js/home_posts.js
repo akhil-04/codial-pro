@@ -13,11 +13,12 @@
                 url:'/posts/create',
                 data:newPostForm.serialize(),
                 success:function(data){
-                    //console.log(data);
+                    console.log(data);
                     let newPost = newPostDom(data.data.post);
-                    $('#post-list-container > ul'). prepend(newPost);
+                    // console.log(newPost);
+                    $('#posts-list-container > ul'). prepend(newPost);
                     deletePost($(' .delete-post-button',newPost));
-                }, error:function(err){
+                }, error:function(error){
                     console.log(error.responseText);
                 }
             });
@@ -52,13 +53,7 @@
     
         <div class="post-comments-list">
                 <ul id="post-comments-${post._id}">
-                        <% for(comment of post.comments) { %>
-    
-                            <!-- linking of _comment.ejs to home.ejs -->
-                           <%- include('_comments') -%>
-    
-    
-                            <% } %>                        
+                                          
                 </ul>
         </div>
     
@@ -71,16 +66,17 @@
 
     //method to delete a post from DOM
     let deletePost = function(deleteLink){
-        $('#delete').click (function(e){
-            e.preventDefault
+        $(deleteLink).click(function(e){
+            e.preventDefault();
+            // console.log(deleteLink);
 
             $.ajax({
                 type:'get',
                 url:$(deleteLink).prop('href'),
                 success:function(data){
-                    $(`#post-${data.data.post._id}`).remove();
-                },error:function(data){
-                    console.log(responseText);
+                    $(`#post-${data.data.post_id}`).remove();
+                },error:function(error){
+                    console.log(error.responseText);
                 }
             });
         });
