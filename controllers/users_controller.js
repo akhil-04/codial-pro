@@ -53,9 +53,15 @@ module.exports.update = async function(req, res){
 
             if(req.file){
 
-               if(user.avatar && fs.existsSync(path)){
-                  // fs=fileSystem, unlinkSync=deleteFunction, other is part where to delete 
-                  fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+               if(user.avatar){
+
+                  if(fs.existsSync(path)){
+
+                     // fs=fileSystem, unlinkSync=deleteFunction, other is part where to delete 
+                  fs.unlinkSync(path.join(__dirname, '..', user.avatar)); 
+                  
+                  }
+                  
                }
                //saving the path of uploaded filr into the avatar field in user
                user.avatar = User.avatarPath + '/' + req.file.filename;
