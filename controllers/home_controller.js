@@ -23,6 +23,8 @@ module.exports.home = async function(req, res){  //aysnc for telling this si asy
 
     //populate the whole user object from each post
     try{
+
+        //by this we get the all posts from DB
     let posts = await Post.find({})
     .sort('-createdAt')
     .populate('user')
