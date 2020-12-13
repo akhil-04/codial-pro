@@ -1,5 +1,7 @@
 const Post = require('../models/post');
 const Comment = require('../models/comments');
+// const User = require('../models/users');
+// const mongoose = require('mongoose')
 
 module.exports.create = async function(req, res){
     try {
@@ -7,18 +9,25 @@ module.exports.create = async function(req, res){
             content: req.body.content,
             user: req.user._id
         });
+        
+        // //for the name appearing under the post content
+        // let userName = await User.findById(req.user._id);
+        // userName = userName.name;
 
         //to check wheather the request is AJAX   type=xmlhttprequest(xhr)
         if(req.xhr){
+             // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it!
+             post = await post.populate('user', 'name').execPopulate();
             return res.status(200).json({
                 data:{
                     post: post
+                    // userName
                 },
                 messgae: "Post Created"
             });
         }
         console.log(req)
-        
+    
             req.flash('success', 'Post Created!');
             return res.redirect('back');
             
@@ -56,7 +65,7 @@ module.exports.destroy = async function(req, res){
         }
     }catch(err){
         req.flash('error', err);
-        // console.log('Error', err);
+        console.log(err);
             return res.redirect('back');
     }
 }

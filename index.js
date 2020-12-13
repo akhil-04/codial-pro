@@ -20,6 +20,9 @@ app.use(sassMiddleware({
     outputStyle: 'extended',
     prefix: '/css'
 }));
+//make the uploads path available to the browser 
+app.use('/uploads', express.static(__dirname + '/uploads'));
+
 //requring the cookies
 const cookieParser = require('cookie-parser');
 //need to tell app to use this
