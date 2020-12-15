@@ -1,5 +1,5 @@
 #home-container{
-    display: flex;
+    display:flex;
 }
 
 #feed-posts{
@@ -10,6 +10,6 @@
 #user-friends{
     width: 30%;
     padding: 10px;
-    border-left: 1px solid lightgrey;
     height: 100%;
+    border-left: 1px solid lightgray;
 }

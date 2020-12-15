@@ -5,6 +5,7 @@ const Post = require('../models/post');
 //In async await 
 module.exports.create = async function(req, res){
     try{
+        
     let post = await Post.findById(req.body.post);
         if(post){
             let comment=await Comment.create({
@@ -31,6 +32,7 @@ module.exports.create = async function(req, res){
                         message:'comment created'
                     });
                 }
+                console.log("not xhr req");
 
                 req.flash('success', 'Comment Created!');
                 return res.redirect('back');
@@ -53,7 +55,7 @@ module.exports.destroy = async function(req, res){
         if(comment.user == req.user.id){
             let postId = Comment.post;
             comment.remove();
-        await Post.findByIdAndUpdate(postId, {$pull:{
+       let post =  await Post.findByIdAndUpdate(postId, {$pull:{
                 comments: req.params.id
             }});
 
@@ -71,7 +73,7 @@ module.exports.destroy = async function(req, res){
             req.flash('success', 'Comment Deleted');
                 return res.redirect('back');
             }else{
-                req.flash('success', 'You cannot delete commet');
+                req.flash('success', 'You cannot delete comment');
             return res.redirect('back');
         }
     }catch(err){

@@ -1,15 +1,16 @@
-<h1>Codeial Homepage / </h1>
-<link rel="stylesheet" href="/css/home.css">
 
+<link rel="stylesheet" href="/css/home.css">
 
 <div id="home-container">
         <section id="feed-posts">
 
-                <h4>Posts</h4>
+                <h2 id="post-heading">POSTS</h2>
                 <% if(locals.user){ %>
                 <form action="/posts/create" id="new-post-form" method="POST">
-                        <textarea name="content" cols="30" rows="3" placeholder="Type Here ..." required></textarea>
-                        <input type="submit" value="Post">
+                        
+                        <textarea id="post-form" name="content" cols="30" rows="3" placeholder="Type Here ..." required></textarea>
+                        <!-- <input type="submit" value="Post"> -->
+                        <button type="Submit" class="btn btn-primary button">Post</button>
                 </form>
                 <% } %>
                 <!-- to show the posts list by list -->
@@ -28,7 +29,7 @@
 
         <!-- to show list of all users -->
         <section id="user-friends">
-                <h4>Friends</h4>
+                <h1>Friends</h1>
                 <% for(u of all_users){ %>
                         <p>
                                 <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
