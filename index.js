@@ -45,6 +45,12 @@ const passportGoogle = require('./config/passport-google-oauth2-strategy');
 const passportFb = require('./config/passport-fb-oauth-strategy');
 const MongoStore = require('connect-mongo')(session);
 
+//setup chatservr to be used with socket.io
+const chatServer = require('http').Server(app);
+const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
+chatServer.listen(5000);
+console.log('chatserver is running on port 5000');
+
 //extarct style and script from sub pages to layout
 app.set('layout extractStyles' ,true);
 app.set('layout extractScripts' ,true);
