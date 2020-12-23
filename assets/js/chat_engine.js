@@ -126,14 +126,12 @@ class ChatEngine {
         newMessage.append(
           $("<span>", {
             'html': data.message,
-          })
-        );
+          }));
   
         newMessage.append(
           $("<sub>", {
             'html': data.user_email,
-          })
-        );
+          }));
   
         newMessage.addClass(messageType);
         
