@@ -1,4 +1,3 @@
-const { Socket } = require('socket.io');
 
 //socketServer and socket is pre-defined class of socket.io library
 module.exports.chatSockets = function(socketServer){

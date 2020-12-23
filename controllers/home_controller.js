@@ -32,8 +32,12 @@ module.exports.home = async function(req, res){  //aysnc for telling this si asy
         path: 'comments',
         populate: {
             path:'user'
+        },
+        //populate the likes for each post and comment
+        populate: {
+            path:'likes'
         }
-    });
+    }).populate('likes');
 
     let users =  await User.find({}); //await is used for telling wait for the upper then execute it
    

@@ -18,8 +18,10 @@ router.use('/posts', require('./posts'));
 router.use('/comments', require('./comments'));
 
 //handles the api part
-router .use('/api', require('./api'));
+router.use('/api', require('./api'));
 
+//handles the likes part
+router.use('/likes', require('./likes'));
 
 // for exports this route to controller
 module.exports = router;
