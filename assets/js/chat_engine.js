@@ -129,7 +129,7 @@ class ChatEngine {
           }));
   
         newMessage.append(
-          $("<sub>", {
+          $("<p>", {
             'html': data.user_email,
           }));
   

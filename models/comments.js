@@ -9,6 +9,10 @@ const commentSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'User' 
     },
+
+    name:{
+        type:String
+    },
     //comment belong to which post
     post:{
         type:mongoose.Schema.Types.ObjectId,

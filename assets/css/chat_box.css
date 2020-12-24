@@ -28,6 +28,8 @@
         display: inline-block;
         padding: 15px;
         background-color: #a0dcff; }
+  #user-chat-box form {
+    display: contents; }
   #user-chat-box #chat-message-input-container {
     height: 24%;
     width: 100%;

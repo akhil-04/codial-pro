@@ -1,6 +1,7 @@
 //to use the models here
 //lets keep it simple not in async await
 const User = require('../models/users');
+const chatMessage = require('../models/chat_messages');
 //these two const for deleting the other versions of image
 const fs = require('fs');
 const path = require('path');
@@ -134,4 +135,19 @@ module.exports.destroySession =(req,res)=>{
    req.logout();
    req.flash('success', 'Logged Out successfully');
   return res.redirect('/');
+}
+
+module.exports.chatMessage = function(req,res){
+  chatMessage.create({
+     content:req.body.content,
+     user:req.user._id,
+     email:req.user.email
+  }, function(err, chat){
+   if(err){
+      console.log('chat message creating error', err)
+      return;
+   }
+
+   return res.redirect('back');
+  });
 }
