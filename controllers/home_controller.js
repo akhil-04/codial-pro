@@ -42,7 +42,7 @@ module.exports.home = async function(req, res){  //aysnc for telling this si asy
         }).populate('likes');
 
 
-    console.log(posts.comments);
+    // console.log(posts.comments);
     
    
     let users =  await User.find({}); //await is used for telling wait for the upper then execute it

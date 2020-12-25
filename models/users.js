@@ -28,6 +28,12 @@ const userSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'chatMessage' 
     },
+    friendship:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Friend'
+        }
+    ]
 },{
     timestamps: true
 });
