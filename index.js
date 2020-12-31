@@ -44,6 +44,10 @@ const passportJWT = require('./config/passport-jwt-strategy');
 const passportGoogle = require('./config/passport-google-oauth2-strategy');
 const passportFb = require('./config/passport-fb-oauth-strategy');
 const MongoStore = require('connect-mongo')(session);
+const env = require('./config/environment');
+
+// const Path=require('path');
+// require('dotenv').config({ path:Path.join(__dirname,'env','one.env')});
 
 //setup chatservr to be used with socket.io
 const chatServer = require('http').Server(app);
@@ -65,7 +69,7 @@ app.set('views', './views');
 //mongo store is used to store the session cookie in the db
 app.use(session({
     name: 'codeail',
-    secret: 'blahsomething',
+    secret: env.sesssion_cookie_key,
     saveUninitialized: false,
     resave: false,
     cookie: {

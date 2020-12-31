@@ -1,6 +1,7 @@
 //to use the models here
 //lets keep it simple not in async await
 const User = require('../models/users');
+const Friendships = require('../models/friendship');
 const chatMessage = require('../models/chat_messages');
 
 //these two const for deleting the other versions of image
@@ -70,6 +71,7 @@ module.exports.update = async function(req, res){
             }
 
             user.save();
+            request.flash("successs", "Profile Updated Successfully");
             return res.redirect('back');
          });
 

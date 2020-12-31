@@ -2,6 +2,10 @@ const Comment = require('../models/comments');
 const Post = require('../models/post');
 const commentsMailer = require('../mailers/comments_mailers');
 const Like = require('../models/like');
+const queue = require('../config/kue');
+const commetEmailWorker = require('../workers/comment_email_worker')
+
+
 
 //In async await 
 module.exports.create = async function(req, res){
@@ -26,7 +30,16 @@ module.exports.create = async function(req, res){
 
                 //we prepopulated the user and send the mail to user who made comment
                 comment = await comment.populate('user', 'name email').execPopulate();
-                commentsMailer.newComment(comment);
+                // commentsMailer.newComment(comment);
+
+                //save() is for saving in DB and it takes function with err
+                let job = queue.create('emails', comment).save(function(err){
+                    if(err){
+                        console.log('error in creating email queue')
+                    }
+
+                    console.log('job enqueud',job.id);
+                })
                 if(req.xhr){
                     
                     return res.status(200).json({

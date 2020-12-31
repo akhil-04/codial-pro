@@ -23,5 +23,9 @@ router.use('/api', require('./api'));
 //handles the likes part
 router.use('/likes', require('./likes'));
 
+//handles the reset password and email.verify part
+router.use("/auth" , require("./auth"));
+
+
 // for exports this route to controller
 module.exports = router;
