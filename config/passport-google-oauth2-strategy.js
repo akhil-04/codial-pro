@@ -24,7 +24,7 @@ function(accessToken, refreshToken, profile, done){
         if(user){
             return done(null, user);
         }else{
-            //if not found. create the user and set it as req.user  (req.user means signin user)
+            //if user not found. create the user and set it as req.user  (req.user means signin user)
             User.create({
                 name:profile.displayName,
                 email:profile.emails[0].value,

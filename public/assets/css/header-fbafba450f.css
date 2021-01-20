@@ -1,0 +1,20 @@
+.bg-light {
+  background-color: #0d85f8 !important; }
+
+.navbar-brand {
+  font-weight: 700; }
+
+.btn {
+  font-weight: 700;
+  border-radius: 0rem; }
+
+.btn-primary {
+  color: floralwhite;
+  background-color: #ff00fc;
+  border-color: #e1ff00; }
+
+.navbar-light .navbar-brand {
+  color: white;
+  text-shadow: 2px;
+  text-shadow: 2px 2px 4px #000000;
+  font-size: 1.7rem; }
