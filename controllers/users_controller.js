@@ -71,7 +71,7 @@ module.exports.update = async function(req, res){
             }
 
             user.save();
-            request.flash("successs", "Profile Updated Successfully");
+            // request.flash("successs", "Profile Updated Successfully");
             return res.redirect('back');
          });
 

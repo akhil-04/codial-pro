@@ -3,6 +3,7 @@ const express =  require('express');
 
 //run that express
 const app = express();
+require('./config/view-helpers')(app);
 
 //port on which we run our server
 const port = 8000;
